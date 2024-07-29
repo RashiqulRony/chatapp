@@ -33,6 +33,7 @@ const auth = {
         },
         UPDATE_TOKEN: (state, rqsData) => {
             state.accessToken = rqsData.token;
+            state.refreshToken = rqsData.token;
             localStorage.setItem("__ACCESS_TOKEN", rqsData.token);
         },
         LOGOUT: (state) => {

@@ -68,7 +68,7 @@ import http from "../../config/http.js";
                     window.location.reload()
                 }).catch((error) => {
                     this.$tAlert('error', error.response.statusText)
-                    if (error.response.status === 422) {
+                    if (error.response.status === 422 || error.response.status === 401) {
                         this.errors = error.response.data.errors
                     }
                     this.isLoading = 0;

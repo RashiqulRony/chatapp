@@ -52,7 +52,7 @@ class AuthController extends Controller
             ];
 
             if (!$token = auth('api')->attempt($credentials)) {
-                return response()->json(['status'=> false, 'errors' => ['email' => ['Unauthorized email or password']]], 422);
+                return response()->json(['status'=> false, 'errors' => ['email' => ['Unauthorized email or password']]], 401);
             }
 
             return response()->json([

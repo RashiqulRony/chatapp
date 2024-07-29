@@ -13,6 +13,8 @@
     import Navigation from "../app/share/Navigation.vue";
     import Sidebar from "../app/share/Sidebar.vue";
     import Appbar from "../app/share/Appbar.vue";
+    import http from "../../config/http.js"
+
     export default {
         components:{
             Navigation,
@@ -20,7 +22,19 @@
             Appbar,
         },
         mounted() {
+            this.refreshToken()
+        },
 
+        methods: {
+            refreshToken() {
+                http.get('refresh-token', this.user).then((response) => {
+                    console.log(response)
+                    this.$store.dispatch("refreshToken", response.data)
+                }).catch((error) => {
+                    // this.$store.dispatch("logout")
+                    this.$tAlert('error', error.response.statusText)
+                });
+            }
         }
     }
 </script>
