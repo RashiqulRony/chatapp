@@ -27,8 +27,7 @@
 
         methods: {
             refreshToken() {
-                http.get('refresh-token', this.user).then((response) => {
-                    console.log(response)
+                http.get('refresh-token').then((response) => {
                     this.$store.dispatch("refreshToken", response.data)
                 }).catch((error) => {
                     // this.$store.dispatch("logout")

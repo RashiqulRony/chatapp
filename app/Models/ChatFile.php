@@ -5,16 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ChatRoom extends Model
+class ChatFile extends Model
 {
     use HasFactory;
 
-    protected $table = 'chat_rooms';
+    protected $table = 'chat_files';
 
     protected $fillable = [
-        'room_admin_id',
-        'user_id_1',
-        'user_id_2',
-        'type',
+        'chat_id',
+        'user_id',
+        'name',
+        'size',
+        'ext',
+        'url',
     ];
 }

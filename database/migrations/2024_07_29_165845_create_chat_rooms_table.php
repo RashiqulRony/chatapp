@@ -13,8 +13,16 @@ return new class extends Migration
     {
         Schema::create('chat_rooms', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->on('users')->references('id')->onDelete('cascade');
+            $table->unsignedBigInteger('room_admin_id')->nullable()->comment('For Group');
+            $table->foreign('room_admin_id')->on('users')->references('id')->onDelete('cascade');
+
+            $table->unsignedBigInteger('user_id_1')->nullable()->comment('For Single');
+            $table->foreign('user_id_1')->on('users')->references('id')->onDelete('cascade');
+
+            $table->unsignedBigInteger('user_id_2')->nullable()->comment('For Single');;
+            $table->foreign('user_id_2')->on('users')->references('id')->onDelete('cascade');
+
+            $table->enum('type', ['Single', 'Group'])->default('Single');
             $table->timestamps();
         });
     }
