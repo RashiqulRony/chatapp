@@ -1,4 +1,5 @@
 
+
 const chats = {
     state: {
         chatLists: [],
@@ -10,13 +11,17 @@ const chats = {
     },
     mutations: {
         CHAT_LISTS: (state, rqsData) => {
-            state.chatLists = rqsData.chat_list;
+            state.chatLists = rqsData.data;
         }
     },
     actions: {
-        chatLists(context, rqsData) {
-            context.commit("CHAT_LISTS", rqsData);
-            return Promise.resolve(rqsData);
+        chatLists(context) {
+             axios.get('get-chat-lists').then((response) => response.data).then((response) => {
+                 context.commit("CHAT_LISTS", response);
+                 return Promise.resolve(response);
+            }).catch((error) => {
+                this.$tAlert('error', error.response.statusText)
+            });
         },
     },
 };

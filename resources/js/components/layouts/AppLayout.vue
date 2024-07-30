@@ -22,6 +22,7 @@
             Appbar,
         },
         mounted() {
+            this.$store.dispatch("chatLists")
             this.refreshToken()
         },
 

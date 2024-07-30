@@ -24,7 +24,6 @@ const auth = {
     },
     mutations: {
         LOGIN_SUCCESS: (state, rqsData) => {
-            console.log(rqsData)
             localStorage.setItem("__AUTH_INFO", JSON.stringify(rqsData.user));
             localStorage.setItem("__ACCESS_TOKEN", rqsData.token);
             state.isLoggedIn = true;

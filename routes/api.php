@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\ApiAuthCheck;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\ChatController;
 
 Route::get('/', function () {
    echo "API is worked";
@@ -22,4 +23,6 @@ Route::group(['middleware' => [ApiAuthCheck::class, 'jwt.auth']], function () {
 
     #For Users Routes...
     Route::get('get-users', [UserController::class, 'getUsers']);
+    Route::post('create-room', [ChatController::class, 'createRoom']);
+    Route::get('get-chat-lists', [ChatController::class, 'getChatLists']);
 });

@@ -13,7 +13,7 @@ class UserController extends Controller
         try {
             $users = User::when($request->key, function($query) use ($request){
                     return $query->where('name', 'like', '%' . $request->key .'%')->orWhere('email', 'like', '%' . $request->key .'%');
-                })->where('id', '!=', auth('api')->id())->get();
+                })->where('id', '!=', auth('api')->id())->paginate(10);
 
             return response()->json([
                 'status' => true,
