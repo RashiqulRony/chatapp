@@ -53,6 +53,7 @@ class ChatController extends Controller
                     $user = User::findOrFail($data->user_id_2);
                     $chatLists[] = [
                         'chat_room_id' => $data->id,
+                        'user_id' => $user->id,
                         'name' => $user->name,
                         'type' => $data->type,
                         'date' => $data->updated_at->diffForHumans()
@@ -62,6 +63,7 @@ class ChatController extends Controller
                     $user = User::findOrFail($data->user_id_1);
                     $chatLists[] = [
                         'chat_room_id' => $data->id,
+                        'user_id' => $user->id,
                         'name' => $user->name,
                         'type' => $data->type,
                         'date' => $data->updated_at->diffForHumans()
