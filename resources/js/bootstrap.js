@@ -1,4 +1,12 @@
 import 'bootstrap';
+/*import '../../public/assets/css/app.min.css';
+import '../../public/assets/css/custom.css';
+import '../../public/assets/vendors/jquery/jquery.js';
+import '../../public/assets/vendors/bootstrap/bootstrap.bundle.min.js';
+import '../../public/assets/vendors/magnific-popup/jquery.magnific-popup.min.js';
+import '../../public/assets/vendors/svg-inject/svg-inject.min.js';
+import '../../public/assets/vendors/modal-stepes/modal-steps.min.js';
+import '../../public/assets/js/custom.js';*/
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

@@ -73,7 +73,7 @@
                                 <li class="contacts-item friends" v-if="chat.type === 'Single'">
                                     <a class="contacts-link">
                                         <div class="avatar avatar-online">
-                                            <img src="../../../../assets/media/avatar/2.png" alt="">
+                                            <img :src="'/assets/media/avatar/2.png'" alt="">
                                         </div>
                                         <div class="contacts-content">
                                             <div class="contacts-info">
@@ -187,7 +187,7 @@
                             <li class="contacts-item active">
                                 <a class="contacts-link" href="#">
                                     <div class="avatar">
-                                        <img src="../../../../assets/media/avatar/3.png" alt="">
+                                        <img :src="'/assets/media/avatar/3.png'" alt="">
                                     </div>
                                     <div class="contacts-content">
                                         <div class="contacts-info">
@@ -208,7 +208,7 @@
                             <li class="contacts-item">
                                 <a class="contacts-link" href="#">
                                     <div class="avatar">
-                                        <img src="../../../../assets/media/avatar/3.png" alt="">
+                                        <img :src="'/assets/media/avatar/3.png'" alt="">
                                     </div>
                                     <div class="contacts-content">
                                         <div class="contacts-info">
@@ -229,7 +229,7 @@
                             <li class="contacts-item">
                                 <a class="contacts-link" href="#">
                                     <div class="avatar">
-                                        <img src="../../../../assets/media/avatar/3.png" alt="">
+                                        <img :src="'/assets/media/avatar/3.png'" alt="">
                                     </div>
                                     <div class="contacts-content">
                                         <div class="contacts-info">
@@ -250,7 +250,7 @@
                             <li class="contacts-item">
                                 <a class="contacts-link" href="#">
                                     <div class="avatar">
-                                        <img src="../../../../assets/media/avatar/3.png" alt="">
+                                        <img :src="'/assets/media/avatar/3.png'" alt="">
                                     </div>
                                     <div class="contacts-content">
                                         <div class="contacts-info">
@@ -268,7 +268,7 @@
                             <li class="contacts-item">
                                 <a class="contacts-link" href="#">
                                     <div class="avatar">
-                                        <img src="../../../../assets/media/avatar/3.png" alt="">
+                                        <img :src="'/assets/media/avatar/3.png'" alt="">
                                     </div>
                                     <div class="contacts-content">
                                         <div class="contacts-info">
@@ -289,7 +289,7 @@
                             <li class="contacts-item">
                                 <a class="contacts-link" href="#">
                                     <div class="avatar">
-                                        <img src="../../../../assets/media/avatar/3.png" alt="">
+                                        <img :src="'/assets/media/avatar/3.png'" alt="">
                                     </div>
                                     <div class="contacts-content">
                                         <div class="contacts-info">
@@ -312,7 +312,7 @@
                             <li class="contacts-item">
                                 <a class="contacts-link" href="#">
                                     <div class="avatar">
-                                        <img src="../../../../assets/media/avatar/3.png" alt="">
+                                        <img :src="'/assets/media/avatar/3.png'" alt="">
                                     </div>
                                     <div class="contacts-content">
                                         <div class="contacts-info">
@@ -332,7 +332,7 @@
                             <li class="contacts-item">
                                 <a class="contacts-link" href="#">
                                     <div class="avatar">
-                                        <img src="../../../../assets/media/avatar/3.png" alt="">
+                                        <img :src="'/assets/media/avatar/3.png'" alt="">
                                     </div>
                                     <div class="contacts-content">
                                         <div class="contacts-info">
@@ -356,7 +356,7 @@
                             <li class="contacts-item">
                                 <a class="contacts-link" href="#">
                                     <div class="avatar">
-                                        <img src="../../../../assets/media/avatar/3.png" alt="">
+                                        <img :src="'/assets/media/avatar/3.png'" alt="">
                                     </div>
                                     <div class="contacts-content">
                                         <div class="contacts-info">
@@ -381,7 +381,7 @@
                             <li class="contacts-item">
                                 <a class="contacts-link" href="#">
                                     <div class="avatar">
-                                        <img src="../../../../assets/media/avatar/3.png" alt="">
+                                        <img :src="'/assets/media/avatar/3.png'" alt="">
                                     </div>
                                     <div class="contacts-content">
                                         <div class="contacts-info">
@@ -415,7 +415,7 @@
                                     <div class="card card-body card-bg-5">
                                         <div class="d-flex flex-column align-items-center">
                                             <div class="avatar avatar-lg mb-3">
-                                                <img class="avatar-img" src="../../../../assets/media/avatar/3.png" alt="">
+                                                <img class="avatar-img" :src="'/assets/media/avatar/3.png'" alt="">
                                             </div>
 
                                             <div class="d-flex flex-column align-items-center">

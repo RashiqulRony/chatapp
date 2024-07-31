@@ -32,7 +32,7 @@
                                 <li class="list-group-item" v-for="(user, index) in users" :key="index">
                                     <div class="media">
                                         <div class="avatar avatar-online mr-2">
-                                            <img src="../../../assets/media/avatar/1.png" alt="">
+                                            <img :src="'/assets/media/avatar/1.png'" alt="">
                                         </div>
                                         <div class="media-body">
                                             <h6 class="text-truncate">
