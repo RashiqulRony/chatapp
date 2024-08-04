@@ -2,7 +2,7 @@
     <div class="chats-tab-open">
         <div class="main-layout">
             <Navigation />
-            <Sidebar />
+<!--            <Sidebar />-->
             <router-view ></router-view>
             <Appbar />
         </div>

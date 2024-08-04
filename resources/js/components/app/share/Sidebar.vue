@@ -71,7 +71,7 @@
                         <ul v-if="$store.getters.chatLists.length > 0" class="contacts-list" id="chatContactTab" data-chat-list="">
                             <template v-for="(chat, ck) in $store.getters.chatLists" :key="ck">
                                 <li class="contacts-item friends" v-if="chat.type === 'Single'">
-                                    <a class="contacts-link">
+                                    <a class="contacts-link" @click="openChat(chat)">
                                         <div class="avatar avatar-online">
                                             <img :src="'/assets/media/avatar/2.png'" alt="">
                                         </div>
@@ -575,6 +575,11 @@ export default {
             }).catch((error) => {
                 this.$tAlert('error', error.response.statusText)
             });
+        },
+
+        openChat (chat) {
+            // this.$store.dispatch("chatStart", chat)
+            this.$emit('openchat', chat);
         }
     }
 }

@@ -83,4 +83,28 @@ class ChatController extends Controller
             ], 500);
         }
     }
+
+    public function getChatInfo(Request $request)
+    {
+        try {
+            $room = ChatRoom::find($request->chat_room_id);
+            $chatUser = User::find($request->user_id);
+
+            $data = [
+                'room' => $room,
+                'chat_user' => $chatUser,
+            ];
+
+            return response()->json([
+                'status' => true,
+                'data' => $data
+            ]);
+
+        } catch (\Exception $exception) {
+            return response()->json([
+                'status' => false,
+                'message' => $exception->getMessage()
+            ], 500);
+        }
+    }
 }
