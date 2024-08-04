@@ -24,6 +24,7 @@
 <script src="{{ asset('assets/vendors/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
 <script src="{{ asset('assets/vendors/svg-inject/svg-inject.min.js') }}"></script>
 <script src="{{ asset('assets/vendors/modal-stepes/modal-steps.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/emojione/emojionearea.min.js') }}"></script>
 <script src="{{ asset('assets/js/custom.js') }}"></script>
 </body>
 </html>

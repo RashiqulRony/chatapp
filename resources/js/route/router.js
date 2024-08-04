@@ -10,6 +10,9 @@ import Register      from '../components/auth/Register.vue'
 import AppLayout    from '../components/layouts/AppLayout.vue'
 import Home         from '../components/app/Home.vue'
 
+/*All Chats Component*/
+import Chats         from '../components/app/chats/Index.vue'
+
 import NotFound      from '../components/NotFound.vue';
 
 const routes = [
@@ -26,6 +29,7 @@ const routes = [
         component: AppLayout,
         children: [
             { path: "/", name: "Home", component: Home , meta: {title: 'Home'}},
+            { path: "/chats", name: "Chats", component: Chats , meta: {title: 'Chats'}},
         ],
         meta: {requiresAuth: true}
     },
