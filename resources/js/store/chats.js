@@ -4,6 +4,8 @@ const chats = {
     state: {
         chatLists: [],
         chatStart: '',
+        chatRoom: '',
+        chatUser: '',
     },
     getters: {
         chatLists: (state) => {
@@ -11,6 +13,12 @@ const chats = {
         },
         chatStart: (state) => {
             return state.chatStart;
+        },
+        chatRoom: (state) => {
+            return state.chatRoom;
+        },
+        chatUser: (state) => {
+            return state.chatUser;
         }
     },
     mutations: {
@@ -19,6 +27,12 @@ const chats = {
         },
         CHAT_START: (state, request) => {
             state.chatStart = request;
+        },
+        CHAT_ROOM: (state, request) => {
+            state.chatRoom = request;
+        },
+        CHAT_USER: (state, request) => {
+            state.chatUser = request;
         },
     },
     actions: {
@@ -32,6 +46,14 @@ const chats = {
         },
         chatStart(context, request) {
             context.commit("CHAT_START", request);
+            return Promise.resolve(request);
+        },
+        chatRoom(context, request) {
+            context.commit("CHAT_ROOM", request);
+            return Promise.resolve(request);
+        },
+        chatUser(context, request) {
+            context.commit("CHAT_USER", request);
             return Promise.resolve(request);
         },
     },

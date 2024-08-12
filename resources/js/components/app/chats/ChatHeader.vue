@@ -12,7 +12,7 @@
                 </div>
 
                 <div class="media-body align-self-center ">
-                    <h6 class="text-truncate mb-0">Catherine Richardson</h6>
+                    <h6 class="text-truncate mb-0">{{ $store.getters.chatUser.name }}</h6>
                     <small class="text-muted">Online</small>
                 </div>
             </div>

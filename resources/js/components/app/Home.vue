@@ -43,7 +43,7 @@ export default {
     components: {Sidebar, ChatBody, ChatHeader, ChatFooter },
     data() {
         return {
-            chat_user: ''
+
         }
     },
 
@@ -56,12 +56,12 @@ export default {
         openChat($event) {
             this.$store.dispatch("chatStart", $event)
             this.getChatUser()
-            alert('ddd')
         },
 
         async getChatUser () {
             await http.post('get-chat-info', this.$store.getters.chatStart).then((response) => response.data).then((response) => {
-                console.log(response)
+                this.$store.dispatch("chatRoom", response.data.room)
+                this.$store.dispatch("chatUser", response.data.chat_user)
             }).catch((error) => {
                 this.$tAlert('error', error.response.statusText)
             });

@@ -124,7 +124,7 @@
                         <div class="sidebar-header sticky-top p-2">
 
                             <div class="d-flex justify-content-between align-items-center">
-                                <h5 class="font-weight-semibold mb-0">Friends</h5>
+                                <h5 class="font-weight-semibold mb-0">Groups</h5>
                                 <ul class="nav flex-nowrap">
                                     <li class="nav-item list-inline-item mr-1">
                                         <a class="nav-link text-muted px-1" href="#" title="Notifications" role="button" data-toggle="modal" data-target="#notificationModal">
@@ -419,7 +419,7 @@
                                             </div>
 
                                             <div class="d-flex flex-column align-items-center">
-                                                <h5>Catherine Richardson</h5>
+                                                <h5>{{ $store.getters.authUser.name }}</h5>
                                             </div>
 
                                             <div class="d-flex">
@@ -455,37 +455,11 @@
                                     </div>
                                     <div class="card mt-3">
                                         <ul class="list-group list-group-flush">
-                                            <li class="list-group-item py-2">
-                                                <div class="media align-items-center">
-                                                    <div class="media-body">
-                                                        <p class="small text-muted mb-0">Local Time</p>
-                                                        <p class="mb-0">10:25 PM</p>
-                                                    </div>
-                                                    <svg class="text-muted hw-20 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                                    </svg>
-                                                </div>
-                                            </li>
-
-                                            <li class="list-group-item py-2">
-                                                <div class="media align-items-center">
-                                                    <div class="media-body">
-                                                        <p class="small text-muted mb-0">Birthdate</p>
-                                                        <p class="mb-0">20/11/1992</p>
-                                                    </div>
-                                                    <svg class="text-muted hw-20 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                                                    </svg>
-                                                </div>
-                                            </li>
-                                            <!-- List Group Item End -->
-
-                                            <!-- List Group Item Start -->
-                                            <li class="list-group-item py-2">
+                                            <li class="list-group-item py-2" v-if="$store.getters.authUser.phone">
                                                 <div class="media align-items-center">
                                                     <div class="media-body">
                                                         <p class="small text-muted mb-0">Phone</p>
-                                                        <p class="mb-0">+01-222-364522</p>
+                                                        <p class="mb-0">{{ $store.getters.authUser?.phone }}</p>
                                                     </div>
                                                     <!-- Default :: Inline SVG -->
                                                     <svg class="text-muted hw-20 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -500,7 +474,7 @@
                                                 <div class="media align-items-center">
                                                     <div class="media-body">
                                                         <p class="small text-muted mb-0">Email</p>
-                                                        <p class="mb-0">catherine.richardson@gmail.com</p>
+                                                        <p class="mb-0">{{ $store.getters.authUser?.email }}</p>
                                                     </div>
 
                                                     <svg class="text-muted hw-20 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -512,31 +486,7 @@
                                             <!-- List Group Item End -->
 
                                             <!-- List Group Item Start -->
-                                            <li class="list-group-item py-2">
-                                                <div class="media align-items-center">
-                                                    <div class="media-body">
-                                                        <p class="small text-muted mb-0">Website</p>
-                                                        <p class="mb-0">www.catherichardson.com</p>
-                                                    </div>
-                                                    <svg class="text-muted hw-20 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                                    </svg>
-                                                </div>
-                                            </li>
 
-                                            <li class="list-group-item pt-2">
-                                                <div class="media align-items-center">
-                                                    <div class="media-body">
-                                                        <p class="small text-muted mb-0">Address</p>
-                                                        <p class="mb-0">1134 Ridder Park Road, San Fransisco, CA 94851</p>
-                                                    </div>
-                                                    <!-- Default :: Inline SVG -->
-                                                    <svg class="text-muted hw-20 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
-                                                    </svg>
-
-                                                </div>
-                                            </li>
                                         </ul>
                                     </div>
                                 </div>
