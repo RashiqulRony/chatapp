@@ -15,8 +15,16 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email', 191)->unique();
+            $table->string('mobile', 15)->unique()->nullable();
+            $table->string('image')->nullable();
+            $table->text('address')->nullable();
+            $table->string('github')->nullable();
+            $table->string('gitlab')->nullable();
+            $table->string('bitbucket')->nullable();
+            $table->string('linkedin')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('status', ['Active', 'Inactive'])->default('Inactive');
             $table->rememberToken();
             $table->timestamps();
         });

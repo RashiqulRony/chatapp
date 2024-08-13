@@ -9,7 +9,6 @@ import Register      from '../components/auth/Register.vue'
 /* App Pages */
 import AppLayout    from '../components/layouts/AppLayout.vue'
 import Home         from '../components/app/Home.vue'
-import Profile      from '../components/app/Profile.vue'
 
 /*All Chats Component*/
 // import Chats         from '../components/app/chats/Index.vue'
@@ -29,8 +28,7 @@ const routes = [
         path: "/",
         component: AppLayout,
         children: [
-            { path: "/", name: "Home", component: Home , meta: {title: 'Home'}},
-            { path: "/profile", name: "Profile", component: Profile , meta: {title: 'Profile'}},
+            { path: "/", name: "Home", component: Home , meta: {title: 'Home'}}
         ],
         meta: {requiresAuth: true}
     },

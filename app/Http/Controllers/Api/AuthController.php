@@ -48,11 +48,18 @@ class AuthController extends Controller
         try {
             $credentials = [
                 'email' => $request->email,
-                'password' => $request->password
+                'password' => $request->password,
+            ];
+            $credentialsStatus = [
+                'email' => $request->email,
+                'password' => $request->password,
+                'status' => "Active",
             ];
 
             if (!$token = auth('api')->attempt($credentials)) {
                 return response()->json(['status'=> false, 'errors' => ['email' => ['Unauthorized email or password']]], 401);
+            } elseif (!$token = auth('api')->attempt($credentialsStatus)) {
+                return response()->json(['status'=> false, 'errors' => ['email' => ['This user is deactivated']]], 401);
             }
 
             return response()->json([
@@ -61,7 +68,7 @@ class AuthController extends Controller
                 'token'      => $token,
                 'token_type' => 'bearer',
                 'user'       => auth('api')->user(),
-                'expires'    => auth('api')->factory()->getTTL() * 60,
+                'expires'    => auth('api')->factory()->getTTL(),
             ]);
         }catch (\Exception $exception) {
             return response()->json([
@@ -111,6 +118,7 @@ class AuthController extends Controller
                 'name'              => $request->name,
                 'email'             => $request->email,
                 'password'          => Hash::make($request->password),
+                'status'            => "Active",
                 'email_verified_at' => now(),
             ]);
             return response()->json([

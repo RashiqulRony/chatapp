@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
                 'name' => 'User '.$i,
                 'email' => 'user'.$i.'@gmail.com',
                 'password' => bcrypt(12345678),
+                'status' => "Active",
                 'email_verified_at' => now()
             ]);
         }

@@ -1,7 +1,7 @@
 <template>
     <aside class="sidebar">
         <div class="tab-content">
-            <div class="tab-pane active" id="chats-content">
+            <div v-if="$store.getters.navBar === 'chat'" class="tab-pane" :class="$store.getters.navBar === 'chat' ? 'active' : ''">
                 <div class="d-flex flex-column h-100">
                     <div class="hide-scrollbar h-100" id="chatContactsList">
                         <div class="sidebar-header sticky-top p-2">
@@ -117,7 +117,8 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane" id="friends-content">
+
+            <div v-if="$store.getters.navBar === 'group'" class="tab-pane" :class="$store.getters.navBar === 'group' ? 'active' : ''">
                 <div class="d-flex flex-column h-100">
                     <div class="hide-scrollbar" id="friendsList">
                         <!-- Chat Header Start -->
@@ -402,7 +403,7 @@
                 </div>
             </div>
 
-            <div class="tab-pane" id="profile-content">
+            <div v-if="$store.getters.navBar === 'profile'" class="tab-pane" :class="$store.getters.navBar === 'profile' ? 'active' : ''">
                 <div class="d-flex flex-column h-100">
                     <div class="hide-scrollbar">
                         <div class="sidebar-header sticky-top p-2 mb-3">
@@ -486,7 +487,6 @@
                                             <!-- List Group Item End -->
 
                                             <!-- List Group Item Start -->
-
                                         </ul>
                                     </div>
                                 </div>

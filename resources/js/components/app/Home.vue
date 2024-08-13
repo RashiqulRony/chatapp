@@ -2,7 +2,7 @@
     <Sidebar v-on:openchat="openChat($event)" />
     <main class="main">
         <div class="chats">
-            <div class="chat-body" v-if="$store.getters.chatStart">
+            <div class="chat-body" v-if="$store.getters.chatStart && ($store.getters.navBar === 'chat' || $store.getters.navBar === 'group')">
                 <!-- Header -->
                 <ChatHeader />
                 <!-- Header End -->
@@ -15,6 +15,7 @@
                 <ChatFooter />
                 <!-- Chat Footer End-->
             </div>
+            <Profile v-else-if="$store.getters.navBar === 'profile'" />
             <div class="d-flex flex-column justify-content-center text-center h-100 w-100" v-else>
                 <div class="container">
                     <div class="avatar avatar-lg mb-2">
@@ -37,10 +38,11 @@ import ChatFooter from "./chats/ChatFooter.vue";
 import ChatHeader from "./chats/ChatHeader.vue";
 import ChatBody from "./chats/ChatBody.vue";
 import Sidebar from "../app/share/Sidebar.vue";
+import Profile from "../app/Profile.vue";
 import http from "../../config/http.js";
 
 export default {
-    components: {Sidebar, ChatBody, ChatHeader, ChatFooter },
+    components: {Sidebar, ChatBody, ChatHeader, ChatFooter, Profile },
     data() {
         return {
 
