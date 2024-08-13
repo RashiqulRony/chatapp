@@ -73,7 +73,8 @@
                                 <li class="contacts-item friends" v-if="chat.type === 'Single'">
                                     <a class="contacts-link" @click="openChat(chat)">
                                         <div class="avatar avatar-online">
-                                            <img :src="'/assets/media/avatar/2.png'" alt="">
+                                            <img v-if="chat.image" :src="'/storage/users/'+chat.image" :alt="chat.name">
+                                            <img v-else :src="'/assets/media/avatar/2.png'" :alt="chat.name">
                                         </div>
                                         <div class="contacts-content">
                                             <div class="contacts-info">
@@ -416,7 +417,13 @@
                                     <div class="card card-body card-bg-5">
                                         <div class="d-flex flex-column align-items-center">
                                             <div class="avatar avatar-lg mb-3">
-                                                <img class="avatar-img" :src="'/assets/media/avatar/3.png'" alt="">
+                                                <template v-if="$store.getters.imgPreview.image && $store.getters.imgPreview.image_for === 'profile'">
+                                                    <img class="avatar-img" :src="$store.getters.imgPreview.image" alt="user">
+                                                </template>
+                                                <template v-else>
+                                                    <img v-if="$store.getters.authUser.image" class="avatar-img" :src="'/storage/users/'+$store.getters.authUser.image" alt="user">
+                                                    <img v-else class="avatar-img" :src="'/assets/media/avatar/3.png'" alt="user">
+                                                </template>
                                             </div>
 
                                             <div class="d-flex flex-column align-items-center">
@@ -439,28 +446,15 @@
                                                 </button>
                                             </div>
                                         </div>
-
-                                        <div class="card-options">
-                                            <div class="dropdown">
-                                                <button class="btn btn-secondary btn-icon btn-minimal btn-sm text-muted text-muted" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <svg class="hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/>
-                                                    </svg>
-                                               </button>
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="#">Change Profile Picture</a>
-                                                    <a class="dropdown-item" href="#">Change Number</a>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
+
                                     <div class="card mt-3">
                                         <ul class="list-group list-group-flush">
-                                            <li class="list-group-item py-2" v-if="$store.getters.authUser.phone">
+                                            <li class="list-group-item py-2" v-if="$store.getters.authUser.mobile">
                                                 <div class="media align-items-center">
                                                     <div class="media-body">
-                                                        <p class="small text-muted mb-0">Phone</p>
-                                                        <p class="mb-0">{{ $store.getters.authUser?.phone }}</p>
+                                                        <p class="small text-muted mb-0">Mobile</p>
+                                                        <p class="mb-0">{{ $store.getters.authUser.mobile }}</p>
                                                     </div>
                                                     <!-- Default :: Inline SVG -->
                                                     <svg class="text-muted hw-20 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -468,14 +462,12 @@
                                                     </svg>
                                                 </div>
                                             </li>
-                                            <!-- List Group Item End -->
 
-                                            <!-- List Group Item Start -->
                                             <li class="list-group-item py-2">
                                                 <div class="media align-items-center">
                                                     <div class="media-body">
                                                         <p class="small text-muted mb-0">Email</p>
-                                                        <p class="mb-0">{{ $store.getters.authUser?.email }}</p>
+                                                        <p class="mb-0">{{ $store.getters.authUser.email }}</p>
                                                     </div>
 
                                                     <svg class="text-muted hw-20 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -484,9 +476,66 @@
 
                                                 </div>
                                             </li>
-                                            <!-- List Group Item End -->
 
-                                            <!-- List Group Item Start -->
+                                            <li class="list-group-item pt-2" v-if="$store.getters.authUser.address">
+                                                <div class="media align-items-center">
+                                                    <div class="media-body">
+                                                        <p class="small text-muted mb-0">Address</p>
+                                                        <p class="mb-0">{{ $store.getters.authUser.address }}</p>
+                                                    </div>
+                                                    <!-- Default :: Inline SVG -->
+                                                    <svg class="text-muted hw-20 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                                                    </svg>
+
+                                                    <!-- Alternate :: External File link -->
+                                                    <!-- <img class="injectable text-muted hw-20 ml-1" src="./../../assets/media/heroicons/outline/home.svg" alt=""> -->
+                                                </div>
+                                            </li>
+                                        </ul>
+
+
+                                    </div>
+
+                                    <div class="card my-3" v-if="$store.getters.authUser.github || $store.getters.authUser.gitlab || $store.getters.authUser.bitbucket || $store.getters.authUser.linkedin">
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item py-2" v-if="$store.getters.authUser.github">
+                                                <div class="media align-items-center">
+                                                    <div class="media-body">
+                                                        <p class="small text-muted mb-0">Github</p>
+                                                        <a class="font-size-sm font-weight-medium" target="_blank" :href="$store.getters.authUser.github">{{ $store.getters.authUser.github }}</a>
+                                                    </div>
+                                                    <img width="20" :src="'/assets/media/icons/github.png'" alt="github">
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item py-2" v-if="$store.getters.authUser.gitlab">
+                                                <div class="media align-items-center">
+                                                    <div class="media-body">
+                                                        <p class="small text-muted mb-0">Gitlab</p>
+                                                        <a class="font-size-sm font-weight-medium" target="_blank" :href="$store.getters.authUser.gitlab">{{ $store.getters.authUser.gitlab }}</a>
+                                                    </div>
+                                                    <img width="20" :src="'/assets/media/icons/gitlab.png'" alt="gitlab">
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item py-2" v-if="$store.getters.authUser.bitbucket">
+                                                <div class="media align-items-center">
+                                                    <div class="media-body">
+                                                        <p class="small text-muted mb-0">Bitbucket</p>
+                                                        <a class="font-size-sm font-weight-medium" target="_blank" :href="$store.getters.authUser.bitbucket">{{ $store.getters.authUser.bitbucket }}</a>
+                                                    </div>
+                                                    <img width="20" :src="'/assets/media/icons/bitbucket.png'" alt="bitbucket">
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item py-2" v-if="$store.getters.authUser.linkedin">
+                                                <div class="media align-items-center">
+                                                    <div class="media-body">
+                                                        <p class="small text-muted mb-0">Linkedin</p>
+                                                        <a class="font-size-sm font-weight-medium" target="_blank" :href="$store.getters.authUser.linkedin">{{ $store.getters.authUser.linkedin }}</a>
+                                                    </div>
+                                                    <img width="20" :src="'/assets/media/icons/linkedin.png'" alt="bitbucket">
+                                                </div>
+                                            </li>
+
                                         </ul>
                                     </div>
                                 </div>

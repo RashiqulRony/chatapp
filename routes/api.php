@@ -23,6 +23,7 @@ Route::group(['middleware' => [ApiAuthCheck::class, 'jwt.auth']], function () {
 
     #For Users Routes...
     Route::get('get-users', [UserController::class, 'getUsers']);
+    Route::post('update-profile', [UserController::class, 'updateProfile']);
 
     #For Chat Routes...
     Route::post('create-room', [ChatController::class, 'createRoom']);

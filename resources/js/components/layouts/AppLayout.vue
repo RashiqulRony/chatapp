@@ -31,8 +31,9 @@
                 http.get('refresh-token').then((response) => {
                     this.$store.dispatch("refreshToken", response.data)
                 }).catch((error) => {
-                    // this.$store.dispatch("logout")
+                    this.$store.dispatch("logout")
                     this.$tAlert('error', error.response.statusText)
+                    this.$router.push({ path: `/auth/login` });
                 });
             }
         }

@@ -23,18 +23,22 @@ const auth = {
         },
     },
     mutations: {
-        LOGIN_SUCCESS: (state, rqsData) => {
-            localStorage.setItem("__AUTH_INFO", JSON.stringify(rqsData.user));
-            localStorage.setItem("__ACCESS_TOKEN", rqsData.token);
+        LOGIN_SUCCESS: (state, request) => {
+            localStorage.setItem("__AUTH_INFO", JSON.stringify(request.user));
+            localStorage.setItem("__ACCESS_TOKEN", request.token);
             state.isLoggedIn = true;
-            state.authInfo = rqsData;
-            state.accessToken = rqsData.token;
-            state.refreshToken = rqsData.refreshToken;
+            state.authInfo = request;
+            state.accessToken = request.token;
+            state.refreshToken = request.refreshToken;
         },
-        UPDATE_TOKEN: (state, rqsData) => {
-            state.accessToken = rqsData.token;
-            state.refreshToken = rqsData.token;
-            localStorage.setItem("__ACCESS_TOKEN", rqsData.token);
+        UPDATE_PROFILE : (state, request) => {
+            localStorage.setItem("__AUTH_INFO", JSON.stringify(request.data));
+            state.authInfo = request.data;
+        },
+        UPDATE_TOKEN: (state, request) => {
+            state.accessToken = request.token;
+            state.refreshToken = request.token;
+            localStorage.setItem("__ACCESS_TOKEN", request.token);
         },
         LOGOUT: (state) => {
             localStorage.removeItem("__AUTH_INFO");
@@ -46,19 +50,21 @@ const auth = {
         },
     },
     actions: {
-        login(context, rqsData) {
-            context.commit("LOGIN_SUCCESS", rqsData);
-            return Promise.resolve(rqsData);
+        login(context, request) {
+            context.commit("LOGIN_SUCCESS", request);
+            return Promise.resolve(request);
         },
-
         logout(context) {
             return context.commit("LOGOUT");
         },
-
-        refreshToken(context, rqsData) {
+        updateProfile(context, request) {
+            context.commit("UPDATE_PROFILE", request);
+            return Promise.resolve(request);
+        },
+        refreshToken(context, request) {
             localStorage.removeItem("__ACCESS_TOKEN");
-            context.commit("UPDATE_TOKEN", rqsData);
-            return Promise.resolve(rqsData);
+            context.commit("UPDATE_TOKEN", request);
+            return Promise.resolve(request);
         },
     },
 };

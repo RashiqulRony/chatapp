@@ -8,7 +8,8 @@
             </button>
             <div class="media chat-name align-items-center text-truncate">
                 <div class="avatar avatar-online d-none d-sm-inline-block mr-3">
-                    <img :src="'/assets/media/avatar/2.png'" alt="">
+                    <img v-if="$store.getters.chatUser.image" :src="'/storage/users/'+$store.getters.chatUser.image" :alt="$store.getters.chatUser.name">
+                    <img v-else :src="'/assets/media/avatar/2.png'" :alt="$store.getters.chatUser.name">
                 </div>
 
                 <div class="media-body align-self-center ">
