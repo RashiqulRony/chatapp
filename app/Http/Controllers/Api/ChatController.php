@@ -137,6 +137,7 @@ class ChatController extends Controller
                 Chat::create([
                      'chat_room_id' => $roomCheck->id,
                      'sender_id'    => $authId,
+                     'receiver_id'  => $request->receiver_id,
                      'type'         => 'text',
                      'message'      => $request->message,
                 ]);
@@ -165,22 +166,33 @@ class ChatController extends Controller
     public function getMessages(Request $request)
     {
         try {
-            $today = Carbon::today();
-            $yesterday = Carbon::yesterday();
+            $authId = auth('api')->id();
+            $secretNumber = $authId + $request->receiver_id;
+            $roomCheck = ChatRoom::where('user_id_1', $authId)->where('user_id_2', $request->receiver_id)->find($request->chat_room_id);
+            if (!$roomCheck) {
+                $roomCheck = ChatRoom::where('user_id_1', $request->receiver_id)->where('user_id_2', $authId)->find($request->chat_room_id);
+            }
+
+            if(!$roomCheck && !Hash::check($secretNumber, $roomCheck->room_secret_key)) {
+                return response()->json([
+                    'status' => false,
+                    'message' => "Something went wrong. Please try again."
+                ], 500);
+            }
 
             $messages = Chat::select(
-                'type',
-                'message',
-                'sender_id',
+                'chats.type',
+                'chats.message',
+                'chats.sender_id',
+                'chats.receiver_id',
+                'chats.created_at',
                 DB::raw('CASE
-                    WHEN DATE(created_at) = CURDATE() THEN "Today"
-                    WHEN DATE(created_at) = CURDATE() - INTERVAL 1 DAY THEN "Yesterday"
-                    ELSE DATE(created_at)
+                    WHEN DATE(chats.created_at) = CURDATE() THEN "Today"
+                    WHEN DATE(chats.created_at) = CURDATE() - INTERVAL 1 DAY THEN "Yesterday"
+                    ELSE DATE(chats.created_at)
                  END as date_group'),
-            )
-                ->orderBy('created_at', 'asc')
-                ->get()
-                ->groupBy('date_group');
+            )->where('chats.chat_room_id', $request->chat_room_id)
+                ->orderBy('chats.created_at', 'asc')->get()->groupBy('date_group');
 
             return response()->json([
                 'status' => true,

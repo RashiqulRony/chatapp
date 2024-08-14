@@ -15,6 +15,9 @@ const auth = {
         authUser: (state) => {
             return state.authInfo;
         },
+        authId: (state) => {
+            return state.authInfo.id;
+        },
         accessToken: (state) => {
             return state.accessToken;
         },

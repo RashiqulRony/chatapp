@@ -72,8 +72,12 @@ export default {
         },
 
         async getChatMessage() {
-            await http.post('get-messages', {chat_room_id: this.$store.getters.chatRoom.id}).then((response) => response.data).then((response) => {
-                console.log(response)
+            let data = {
+                receiver_id : this.$store.getters.chatUser.id,
+                chat_room_id: this.$store.getters.chatRoom.id
+            }
+            await http.post('get-messages', data).then((response) => response.data).then((response) => {
+                this.$store.dispatch("chatMessages", response.data)
             }).catch((error) => {
                 this.$tAlert('error', error.response.statusText)
             });
