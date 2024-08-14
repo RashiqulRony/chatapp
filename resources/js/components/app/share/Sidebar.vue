@@ -421,7 +421,7 @@
                                                     <img class="avatar-img" :src="$store.getters.imgPreview.image" alt="user">
                                                 </template>
                                                 <template v-else>
-                                                    <img v-if="$store.getters.authUser.image" class="avatar-img" :src="'/storage/users/'+$store.getters.authUser.image" alt="user">
+                                                    <img v-if="$store.getters.authUser.image" class="avatar-img" :src="'/storage/users/'+$store.getters.authUser.image" :alt="$store.getters.authUser.name">
                                                     <img v-else class="avatar-img" :src="'/assets/media/avatar/3.png'" alt="user">
                                                 </template>
                                             </div>

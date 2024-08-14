@@ -77,9 +77,9 @@
 </template>
 
 <script>
-    import http from "../../config/http.js";
+import http from "../../config/http.js";
 
-    export default {
+export default {
         data() {
             return {
                 users: [],
@@ -130,9 +130,10 @@
                 await this.getUsers();
             },
 
-            async createConversation(userId) {
+            createConversation: async function (userId) {
                 await http.post('create-room', {user_id: userId}).then((response) => response.data).then((response) => {
                     this.$store.dispatch("chatLists")
+                    this.users = this.users.filter(x => { return x.id !== userId })
                     this.$tAlert('success', response.message)
                 }).catch((error) => {
                     this.$tAlert('error', error.response.statusText)

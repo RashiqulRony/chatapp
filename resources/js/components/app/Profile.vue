@@ -172,19 +172,20 @@ export default {
                     alert('This file is not an image')
                 }
             }
-            postData.append('name', this.user.name);
-            postData.append('email', this.user.email);
-            postData.append('mobile', this.user.mobile);
-            postData.append('address', this.user.address);
-            postData.append('github', this.user.github);
-            postData.append('gitlab', this.user.gitlab);
-            postData.append('bitbucket', this.user.bitbucket);
-            postData.append('linkedin', this.user.linkedin);
+            postData.append('name', this.user.name ?? '');
+            postData.append('email', this.user.email ?? '');
+            postData.append('mobile', this.user.mobile ?? '');
+            postData.append('address', this.user.address ?? '');
+            postData.append('github', this.user.github ?? '');
+            postData.append('gitlab', this.user.gitlab ?? '');
+            postData.append('bitbucket', this.user.bitbucket ?? '');
+            postData.append('linkedin', this.user.linkedin ?? '');
 
             await http.post('update-profile', postData).then((response) => response.data).then((response) => {
                 this.$store.dispatch('imgPreview', '')
                 this.$store.dispatch('updateProfile', response)
                 this.$tAlert('success', response.message)
+                this.errors = [];
             }).catch((error) => {
                 this.$store.dispatch('imgPreview', '')
                 if (error.response.status === 422) {

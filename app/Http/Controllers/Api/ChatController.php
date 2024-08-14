@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Chat;
 use App\Models\ChatRoom;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -102,6 +103,44 @@ class ChatController extends Controller
                 'data' => $data
             ]);
 
+        } catch (\Exception $exception) {
+            return response()->json([
+                'status' => false,
+                'message' => $exception->getMessage()
+            ], 500);
+        }
+    }
+
+    public function createMessage(Request $request)
+    {
+        try {
+            $authId = auth('api')->id();
+            $roomCheck = ChatRoom::where('user_id_1', $authId)->where('user_id_2', $request->receiver_id)->find($request->chat_room_id);
+            if (!$roomCheck) {
+                $roomCheck = ChatRoom::where('user_id_1', $request->receiver_id)->where('user_id_2', $authId)->find($request->chat_room_id);
+            }
+
+            if ($roomCheck) {
+                Chat::create([
+                     'chat_room_id' => $roomCheck->id,
+                     'sender_id'    => $authId,
+                     'type'         => 'text',
+                     'message'      => $request->message,
+                ]);
+
+                $roomCheck->updated_at = now();
+                $roomCheck->save();
+
+                return response()->json([
+                    'status' => true,
+                    'message' => "Message send successfully"
+                ]);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'message' => "Something went wrong. Please try again."
+                ], 500);
+            }
         } catch (\Exception $exception) {
             return response()->json([
                 'status' => false,

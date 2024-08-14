@@ -29,4 +29,5 @@ Route::group(['middleware' => [ApiAuthCheck::class, 'jwt.auth']], function () {
     Route::post('create-room', [ChatController::class, 'createRoom']);
     Route::get('get-chat-lists', [ChatController::class, 'getChatLists']);
     Route::post('get-chat-info', [ChatController::class, 'getChatInfo']);
+    Route::post('create-message', [ChatController::class, 'createMessage']);
 });
