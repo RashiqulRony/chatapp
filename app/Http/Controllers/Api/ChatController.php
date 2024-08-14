@@ -7,6 +7,9 @@ use App\Models\Chat;
 use App\Models\ChatRoom;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class ChatController extends Controller
@@ -23,10 +26,12 @@ class ChatController extends Controller
         }
 
         try {
+            $roomSecretKey = (auth('api')->id() + $request->user_id);
             ChatRoom::create([
                 'user_id_1' => auth('api')->id(),
                 'user_id_2' => $request->user_id,
                 'type' => 'Single',
+                'room_secret_key' => bcrypt($roomSecretKey),
             ]);
 
             return response()->json([
@@ -115,12 +120,20 @@ class ChatController extends Controller
     {
         try {
             $authId = auth('api')->id();
+            $secretNumber = $authId + $request->receiver_id;
             $roomCheck = ChatRoom::where('user_id_1', $authId)->where('user_id_2', $request->receiver_id)->find($request->chat_room_id);
             if (!$roomCheck) {
                 $roomCheck = ChatRoom::where('user_id_1', $request->receiver_id)->where('user_id_2', $authId)->find($request->chat_room_id);
             }
 
             if ($roomCheck) {
+                if(!Hash::check($secretNumber, $roomCheck->room_secret_key)) {
+                    return response()->json([
+                        'status' => false,
+                        'message' => "Something went wrong. Please try again."
+                    ], 500);
+                }
+
                 Chat::create([
                      'chat_room_id' => $roomCheck->id,
                      'sender_id'    => $authId,
@@ -141,6 +154,39 @@ class ChatController extends Controller
                     'message' => "Something went wrong. Please try again."
                 ], 500);
             }
+        } catch (\Exception $exception) {
+            return response()->json([
+                'status' => false,
+                'message' => $exception->getMessage()
+            ], 500);
+        }
+    }
+
+    public function getMessages(Request $request)
+    {
+        try {
+            $today = Carbon::today();
+            $yesterday = Carbon::yesterday();
+
+            $messages = Chat::select(
+                'type',
+                'message',
+                'sender_id',
+                DB::raw('CASE
+                    WHEN DATE(created_at) = CURDATE() THEN "Today"
+                    WHEN DATE(created_at) = CURDATE() - INTERVAL 1 DAY THEN "Yesterday"
+                    ELSE DATE(created_at)
+                 END as date_group'),
+            )
+                ->orderBy('created_at', 'asc')
+                ->get()
+                ->groupBy('date_group');
+
+            return response()->json([
+                'status' => true,
+                'data' => $messages
+            ]);
+
         } catch (\Exception $exception) {
             return response()->json([
                 'status' => false,

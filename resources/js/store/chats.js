@@ -6,6 +6,7 @@ const chats = {
         chatStart: '',
         chatRoom: '',
         chatUser: '',
+        chatMessages: [],
     },
     getters: {
         chatLists: (state) => {
@@ -19,6 +20,9 @@ const chats = {
         },
         chatUser: (state) => {
             return state.chatUser;
+        },
+        chatMessages: (state) => {
+            return state.chatMessages;
         }
     },
     mutations: {
@@ -34,6 +38,9 @@ const chats = {
         CHAT_USER: (state, request) => {
             state.chatUser = request;
         },
+        CHAT_MESSAGES: (state, request) => {
+            state.chatMessages = request;
+        }
     },
     actions: {
         chatLists(context) {
@@ -56,6 +63,10 @@ const chats = {
             context.commit("CHAT_USER", request);
             return Promise.resolve(request);
         },
+        chatMessages(context, request) {
+            context.commit("CHAT_MESSAGES", request);
+            return Promise.resolve(request);
+        }
     },
 };
 

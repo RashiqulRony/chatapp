@@ -16,5 +16,10 @@ class ChatRoom extends Model
         'user_id_1',
         'user_id_2',
         'type',
+        'room_secret_key',
+    ];
+
+    protected $hidden = [
+        'room_secret_key'
     ];
 }

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->foreign('user_id_2')->on('users')->references('id')->onDelete('cascade');
 
             $table->enum('type', ['Single', 'Group'])->default('Single');
+            $table->string('room_secret_key')->nullable();
             $table->timestamps();
         });
     }

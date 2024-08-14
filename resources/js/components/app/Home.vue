@@ -12,7 +12,7 @@
                 <!-- Chat Content End-->
 
                 <!-- Chat Footer Start-->
-                <ChatFooter />
+                <ChatFooter v-on:sendmessage="getChatMessage()" />
                 <!-- Chat Footer End-->
             </div>
             <Profile v-else-if="$store.getters.navBar === 'profile'" />
@@ -65,10 +65,21 @@ export default {
             await http.post('get-chat-info', this.$store.getters.chatStart).then((response) => response.data).then((response) => {
                 this.$store.dispatch("chatRoom", response.data.room)
                 this.$store.dispatch("chatUser", response.data.chat_user)
+                this.getChatMessage()
             }).catch((error) => {
                 this.$tAlert('error', error.response.statusText)
             });
-        }
+        },
+
+        async getChatMessage() {
+            await http.post('get-messages', {chat_room_id: this.$store.getters.chatRoom.id}).then((response) => response.data).then((response) => {
+                console.log(response)
+            }).catch((error) => {
+                this.$tAlert('error', error.response.statusText)
+            });
+        },
+
+
     }
 }
 </script>
