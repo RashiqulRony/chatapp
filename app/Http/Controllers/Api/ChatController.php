@@ -27,7 +27,7 @@ class ChatController extends Controller
 
         try {
             $roomSecretKey = (auth('api')->id() + $request->user_id);
-            ChatRoom::create([
+            $room = ChatRoom::create([
                 'user_id_1' => auth('api')->id(),
                 'user_id_2' => $request->user_id,
                 'type' => 'Single',
@@ -36,7 +36,8 @@ class ChatController extends Controller
 
             return response()->json([
                 'status' => true,
-                'message' => 'Room Created Successfully'
+                'data' => $room,
+                'message' => 'Room Created Successfully',
             ]);
 
         } catch (\Exception $exception) {

@@ -13,7 +13,7 @@
                         <div class="message-options">
                             <div class="avatar avatar-sm">
                                 <img v-if="$store.getters.authUser.image" :src="'/storage/users/'+$store.getters.authUser.image" :alt="$store.getters.authUser.name">
-                                <img v-else :src="'/assets/media/avatar/3.png'" :alt="$store.getters.authUser.name">
+                                <img v-else :src="'/assets/media/avatar/user.png'" :alt="$store.getters.authUser.name">
                             </div>
 
                             <span class="message-date">Just now</span>
@@ -68,7 +68,7 @@
                         <div class="message-options">
                             <div class="avatar avatar-sm">
                                 <img v-if="$store.getters.chatUser.image" :src="'/storage/users/'+$store.getters.chatUser.image" :alt="$store.getters.chatUser.name">
-                                <img v-else :src="'/assets/media/avatar/2.png'" :alt="$store.getters.chatUser.name">
+                                <img v-else :src="'/assets/media/avatar/user.png'" :alt="$store.getters.chatUser.name">
                             </div>
 
                             <span class="message-date">Just now</span>
