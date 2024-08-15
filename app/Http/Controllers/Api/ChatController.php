@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\TestEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Chat;
 use App\Models\ChatRoom;
@@ -145,6 +146,8 @@ class ChatController extends Controller
 
                 $roomCheck->updated_at = now();
                 $roomCheck->save();
+
+                event(new TestEvent());
 
                 return response()->json([
                     'status' => true,
