@@ -3,17 +3,9 @@
     <main class="main">
         <div class="chats">
             <div class="chat-body" v-if="$store.getters.chatStart && ($store.getters.navBar === 'chat' || $store.getters.navBar === 'group')">
-                <!-- Header -->
                 <ChatHeader />
-                <!-- Header End -->
-
-                <!-- Chat Content Start-->
                 <ChatBody />
-                <!-- Chat Content End-->
-
-                <!-- Chat Footer Start-->
                 <ChatFooter v-on:sendmessage="getChatMessage()" />
-                <!-- Chat Footer End-->
             </div>
             <Profile v-else-if="$store.getters.navBar === 'profile'" />
             <div class="d-flex flex-column justify-content-center text-center h-100 w-100" v-else>
