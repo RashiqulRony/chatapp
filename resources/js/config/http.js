@@ -4,7 +4,7 @@ import store from '../store/index'
 axios.defaults.headers.common["Accept"] =  "application/json";
 axios.defaults.headers.common["Content-Type"] =  "application/json";
 axios.defaults.headers.common["Content-Type"] =  "multipart/form-data";
-axios.defaults.baseURL = "http://127.0.0.1:8000/api";
+axios.defaults.baseURL = apiURL;
 
 if (store.getters.isLoggedIn === true) {
     axios.interceptors.request.use(async (config) => {

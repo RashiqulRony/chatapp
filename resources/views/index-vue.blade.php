@@ -14,6 +14,10 @@
     <link type="text/css" href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet">
     <link type="text/css" href="{{ asset('assets/css/custom.css') }}" rel="stylesheet">
     @vite(['resources/js/app.js'])
+    <script>
+        let baseURL = '{{ url('/') }}';
+        let apiURL = '{{ url('api') }}';
+    </script>
 <body>
 <div id="app">
     <router-view :key="$route.fullPath" ></router-view>
