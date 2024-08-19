@@ -61,6 +61,7 @@ export default {
                 .listen('ChatEvent', e => {
                     vm.getChatMessage();
                     this.scrollToBottom()
+                    this.$store.dispatch("chatLists")
                 });
         },
 
