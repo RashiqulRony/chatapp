@@ -32,6 +32,9 @@ return Application::configure(basePath: dirname(__DIR__))
             if ($request->is('api/*')) {
                 return true;
             }
+            if ($request->is('broadcasting/*')) {
+                return true;
+            }
             return $request->expectsJson();
         });
     })->create();

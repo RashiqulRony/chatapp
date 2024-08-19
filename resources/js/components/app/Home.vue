@@ -5,7 +5,7 @@
             <div class="chat-body" v-if="$store.getters.chatStart && ($store.getters.navBar === 'chat' || $store.getters.navBar === 'group')">
                 <ChatHeader />
                 <ChatBody />
-                <ChatFooter v-on:sendmessage="connect()" />
+                <ChatFooter v-on:sendmessage="connect($event)" />
             </div>
             <Profile v-else-if="$store.getters.navBar === 'profile'" />
             <div class="d-flex flex-column justify-content-center text-center h-100 w-100" v-else>
@@ -53,19 +53,21 @@ export default {
 
 
     methods: {
-        connect() {
+        connect($event) {
             let vm = this;
             vm.getChatMessage();
-            window.Echo.channel("testChannel")
-                .listen('TestEvent', e => {
-                    console.log(e)
+            this.scrollToBottom()
+            window.Echo.channel("new-chat")
+                .listen('ChatEvent', e => {
                     vm.getChatMessage();
+                    this.scrollToBottom()
                 });
         },
 
         openChat($event) {
             this.$store.dispatch("chatStart", $event)
             this.getChatUser()
+            this.scrollToBottom()
         },
 
         async getChatUser () {
@@ -89,6 +91,13 @@ export default {
                 this.$tAlert('error', error.response.statusText)
             });
         },
+
+        scrollToBottom() {
+            setTimeout(function () {
+                const chatDiv = document.getElementById('messageBody');
+                chatDiv.scrollTop = chatDiv.scrollHeight;
+            }, 500)
+        }
 
 
     }

@@ -119,3 +119,15 @@
         }
     }
 </script>
+
+<style scoped>
+.chat-body .chat-content {
+    /* flex: 2; */
+    -ms-overflow-style: none;
+    /* scrollbar-width: none; */
+    /* overflow-y: auto; */
+    /* overflow-x: hidden; */
+    height: calc(100vh - 150px)!important;
+    overflow-y: auto;
+}
+</style>

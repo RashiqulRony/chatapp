@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\ChatEvent;
 use App\Events\TestEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Chat;
@@ -136,7 +137,7 @@ class ChatController extends Controller
                     ], 500);
                 }
 
-                Chat::create([
+                $chat = Chat::create([
                      'chat_room_id' => $roomCheck->id,
                      'sender_id'    => $authId,
                      'receiver_id'  => $request->receiver_id,
@@ -147,11 +148,12 @@ class ChatController extends Controller
                 $roomCheck->updated_at = now();
                 $roomCheck->save();
 
-                event(new TestEvent());
+                event(new ChatEvent($chat));
 
                 return response()->json([
                     'status' => true,
-                    'message' => "Message send successfully"
+                    'message' => "Message send successfully",
+                    'data' => $chat
                 ]);
             } else {
                 return response()->json([

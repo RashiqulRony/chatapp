@@ -84,9 +84,10 @@
                     };
                     await http.post('create-message', data).then((response) => response.data).then((response) => {
                         this.$store.dispatch("chatLists")
-                        this.$emit('sendmessage');
+                        this.$emit('sendmessage', response.data);
                         this.message = '';
                     }).catch((error) => {
+                        console.log(error)
                         this.$tAlert('error', error.response.statusText)
                     });
                 } else {
